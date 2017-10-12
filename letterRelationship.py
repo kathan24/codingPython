@@ -88,6 +88,11 @@ result.extend(remaining_letters)
 print "".join(result)
 
 
+# NOTE: Here relationship is build in reverse order a -> b,e ( b and e are dependent on a) so use TOPOLOGICAL SORT
+# Another case https://github.com/kathan24/codingJava/blob/master/src/buildOrder.java
+# where dependency is NOT reverse to use recursion
+
+
 # Easier solution - TOPOLOGICAL SORT
 # from https://discuss.leetcode.com/topic/28308/java-ac-solution-using-bfs/2
 
