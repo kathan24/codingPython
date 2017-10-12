@@ -1,5 +1,7 @@
 __author__ = 'kathan'
 
+from collections import deque
+
 """
 SOLUTION
 
@@ -76,7 +78,6 @@ def form_word(result, relationship):
 relationship = {}
 dictionary_list = ["bat", "bear", "cat", "ear", "ebb"]
 find_relationship(dictionary_list, [], relationship)
-print relationship
 
 remaining_letters = get_remaining_letters(relationship, dictionary_list)
 
@@ -85,3 +86,69 @@ form_word(result, relationship)
 result.extend(remaining_letters)
 
 print "".join(result)
+
+
+# Easier solution - TOPOLOGICAL SORT
+# from https://discuss.leetcode.com/topic/28308/java-ac-solution-using-bfs/2
+
+
+def letterRelationship(words):
+    map = {}
+    letter_count = {}
+
+    for word in words:
+        for letter in word:
+            letter_count[letter] = 0
+
+    for index in range(len(words)-1):
+        cur_word = words[index]
+        next_word = words[index + 1]
+
+        length = min(len(cur_word), len(next_word))
+
+        for j in range(length):
+            if cur_word[j] != next_word[j]:
+                unique = None
+                if cur_word[j] in map:
+                    unique = map[cur_word[j]]
+                else:
+                    unique = set()
+
+                if next_word[j] not in unique:
+                    unique.add(next_word[j])
+                    map[cur_word[j]] = unique
+                    letter_count[next_word[j]] +=1
+
+                break
+
+    no_relation_list = []
+    queue = deque()
+
+    for letter in letter_count:
+        if letter_count[letter] == 0:
+            if letter in map:
+                queue.append(letter)
+            else:
+                no_relation_list.append(letter)
+
+    result = ""
+
+    while len(queue) != 0:
+        char = queue.pop()
+        result += char
+
+        if char in map:
+            for letter in map[char]:
+                letter_count[letter] -= 1
+
+                if letter_count[letter] == 0:
+                    queue.append(letter)
+
+    result += "".join(no_relation_list)
+
+    return result
+
+print letterRelationship(dictionary_list)
+
+
+

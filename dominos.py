@@ -44,6 +44,10 @@ class DominoBag(object):
 
         return False
 
+    def is_loop_without_base(self):
+        return self.is_loop(self.domino_list[len(self.domino_list) - 1].first_half, [])
+
+
 domino1 = Domino(0,1)
 domino2 = Domino(2,3)
 domino3 = Domino(1,2)
@@ -62,3 +66,4 @@ domino_bag1.add(domino4)
 domino_bag1.add(domino5)
 domino_bag1.add(domino6)
 print domino_bag1.is_loop(0, [])
+print domino_bag1.is_loop_without_base()
