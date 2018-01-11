@@ -11,9 +11,6 @@ def minSum(node, sum):
     if node is None:
         return sum
 
-    if node.left is None and node.right is None:
-        return node.value + sum
-
     left_sum = minSum(node.left, node.value + sum)
     right_sum = minSum(node.right, node.value + sum)
 
@@ -26,9 +23,6 @@ def minSum(node, sum):
 def maxSum(node, sum):
     if node is None:
         return sum
-
-    if node.left is None and node.right is None:
-        return node.value + sum
 
     left_sum = maxSum(node.left, node.value + sum)
     right_sum = maxSum(node.right, node.value + sum)

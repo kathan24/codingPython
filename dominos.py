@@ -24,7 +24,9 @@ class DominoBag(object):
             if domino.first_half + 1 == domino.second_half or domino.second_half + 1 == domino.first_half:
                 unique_domino_list[min(domino.first_half, domino.second_half)] = True
 
-        return all(unique_domino_list)
+                if all(unique_domino_list):
+                    return True
+        return False
 
     # check if there is a loop in domino like [0 | 1] [1 | 2] [2 | 0]
     def is_loop(self, base, current_list, parent=None):
@@ -65,5 +67,6 @@ domino_bag1 = DominoBag()
 domino_bag1.add(domino4)
 domino_bag1.add(domino5)
 domino_bag1.add(domino6)
+
 print domino_bag1.is_loop(0, [])
 print domino_bag1.is_loop_without_base()

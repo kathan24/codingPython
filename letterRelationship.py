@@ -105,7 +105,7 @@ def letterRelationship(words):
         for letter in word:
             letter_count[letter] = 0
 
-    for index in range(len(words)-1):
+    for index in range(len(words) - 1):
         cur_word = words[index]
         next_word = words[index + 1]
 
@@ -122,7 +122,7 @@ def letterRelationship(words):
                 if next_word[j] not in unique:
                     unique.add(next_word[j])
                     map[cur_word[j]] = unique
-                    letter_count[next_word[j]] +=1
+                    letter_count[next_word[j]] += 1
 
                 break
 
